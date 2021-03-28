@@ -1,2 +1,15 @@
-# Tangram
-DIY页面生成
+# umi project
+
+## Getting Started
+
+Install dependencies,
+
+```bash
+$ yarn
+```
+
+Start the dev server,
+
+```bash
+$ yarn start
+```
