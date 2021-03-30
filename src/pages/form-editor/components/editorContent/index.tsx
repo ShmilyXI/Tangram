@@ -27,6 +27,7 @@ const themes: Themes = {
   },
 };
 
+// 内容区
 const EditorContent = (props: EditorContentProps) => {
   const { theme, needRulerDrag } = props;
   const guidesRef1: any = useRef(null);
