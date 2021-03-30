@@ -119,14 +119,7 @@ const EditorContent = (props: EditorContentProps) => {
           }}
         />
       </div>
-
       <div className="container">11232131231232323</div>
-      {/* <Guides
-        type="horizontal"
-        onChangeGuides={({ guides }) => {
-          console.log(guides);
-        }}
-      /> */}
     </div>
   );
 };
