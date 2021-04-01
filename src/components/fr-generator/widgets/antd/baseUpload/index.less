@@ -1,0 +1,38 @@
+.preview {
+  top: 0 !important;
+  height: 100%;
+  padding-bottom: 0 !important;
+  overflow: hidden;
+  :global(.ant-modal-close-x) {
+    color: #fff;
+    font-size: 32px !important;
+  }
+  :global(.ant-modal-content) {
+    height: 100%;
+    background: none;
+  }
+  :global(.ant-modal-body) {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #c1c1c1;
+      border-radius: 8px;
+    }
+  }
+  .img {
+    display: block;
+    max-width: 100%;
+    margin: auto;
+  }
+}

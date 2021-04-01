@@ -48,11 +48,11 @@ const EditorContent = (props: EditorContentProps) => {
         guidesRef2.current.scrollGuides(scrollX);
         guidesRef2.current.scroll(scrollY);
       });
+      document.addEventListener('resize', () => {
+        guidesRef1.current.resize();
+        guidesRef2.current.resize();
+      });
     }
-    documentEle.addEventListener('resize', () => {
-      guidesRef1.current.resize();
-      guidesRef2.current.resize();
-    });
   }, []);
 
   const restore = () => {

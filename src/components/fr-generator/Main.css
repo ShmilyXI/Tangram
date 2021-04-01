@@ -1,0 +1,73 @@
+.fr-wrapper .form-footer {
+  padding: 15px 0;
+}
+.fr-wrapper .form-header {
+  min-height: 100px;
+  padding: 15px;
+  border-bottom: 1px dashed #eaeaea;
+  margin-bottom: 15px;
+}
+.fr-wrapper .form-header .formName {
+  color: #333;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.fr-wrapper .form-header .formDescription {
+  color: #999;
+  font-size: 16px;
+  margin-bottom: 0;
+  word-break: break-all;
+}
+.mid-layout {
+  min-width: 400px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  /* height: 100%; */
+  overflow: hidden;
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fr-wrapper {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  min-height: 30vh;
+}
+
+.fr-wrapper .dnd-container {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.fr-wrapper .ant-tabs.ant-tabs-top {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 5px 8px;
+}
+
+.fr-wrapper .ant-tabs-content-holder {
+  flex-grow: 1;
+}
+
+.fr-wrapper .ant-tabs-content.ant-tabs-content-top {
+  height: 100%;
+}
+
+.fr-wrapper .ant-tabs-tabpane.ant-tabs-tabpane-active {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
