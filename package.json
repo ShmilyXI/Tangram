@@ -26,7 +26,15 @@
     "gesto": "^1.3.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "umi": "^3.4.7"
+    "react-dnd": "^14.0.2",
+    "react-dnd-html5-backend": "^14.0.0",
+    "umi": "^3.4.7",
+    "react-sortable-hoc": "^1.11.0",
+    "react-viewer": "^3.2.2",
+    "copy-text-to-clipboard": "^2.2.0",
+    "nanoid": "^2.1.11",
+    "rc-color-picker": "^1.2.6",
+    "clone": "^2.1.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
@@ -38,6 +46,8 @@
     "react": "17.x",
     "react-dom": "17.x",
     "typescript": "^4.1.2",
-    "yorkie": "^2.0.0"
+    "yorkie": "^2.0.0",
+    "form-render": "^0.10.5",
+    "classnames": "2.2.6"
   }
 }

@@ -1,21 +1,18 @@
 .left-layout {
   flex-shrink: 0;
+  width: 100%;
+  min-width: 350px;
+  height: 100%;
   /* padding: 16px 0 0 8px; */
   overflow-y: auto;
-  height: 100%;
-}
-
-.component-title {
-  height: 2rem;
-  background-color: #e4e4e4;
-  padding: 5px 8px;
-  font-weight: 500;
-  font-size: 15px;
-  color: #333;
 }
 
 .left-layout ul {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+}
+
+.left-layout .iconfont {
+  font-size: 22px;
 }

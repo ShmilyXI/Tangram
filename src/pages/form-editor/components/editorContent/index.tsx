@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Guides from '@scena/react-guides';
 import Gesto from 'gesto';
-import { givenRangeArrayNumber } from '@/utils/index';
+
 import './index.less';
 
 interface EditorContentProps {
@@ -119,7 +119,9 @@ const EditorContent = (props: EditorContentProps) => {
           }}
         />
       </div>
-      <div className="container">11232131231232323</div>
+      <div className="container">
+        <Generator extraButtons={[true]} />
+      </div>
     </div>
   );
 };

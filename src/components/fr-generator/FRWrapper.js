@@ -8,6 +8,9 @@ import { useSet, useStorageState } from './hooks';
 import copyTOClipboard from 'copy-text-to-clipboard';
 import Left from './Left';
 import Right from './Right';
+import { Modal, Input, message, Button } from 'antd';
+import { Layout } from 'antd';
+import Align from './components/align';
 import {
   flattenSchema,
   idToSchema,
@@ -24,10 +27,10 @@ import { Ctx, StoreCtx } from './context';
 // import SCHEMA from './json/basic.json';
 import FR from './FR';
 import FormRender from '@/components/FormRender';
-import { Modal, Input, message, Button } from 'antd';
 import _ from 'lodash';
 
 const { TextArea } = Input;
+const { Header, Footer, Sider, Content } = Layout;
 
 function Wrapper(
   {
@@ -61,6 +64,8 @@ function Wrapper(
   } = userProps;
 
   const [saveList, setSaveList] = useState(templates || []);
+  const [collapsedLeftSider, setCollapsedLeftSider] = useState(false); // 折叠左侧
+  const [collapsedRightSider, setCollapsedRightSider] = useState(false); // 折叠右侧
 
   const saveNameRef = useRef();
 
@@ -221,6 +226,9 @@ function Wrapper(
     }
   };
 
+  const toggleLeftSider = () => setCollapsedLeftSider(!collapsedLeftSider);
+  const toggleRightSider = () => setCollapsedRightSider(!collapsedRightSider);
+
   // TODO: flatten是频繁在变的，应该和其他两个函数分开
   const store = {
     flatten: flattenWithData, // schema + formData = flattenWithData
@@ -253,81 +261,153 @@ function Wrapper(
     <Ctx.Provider value={setGlobal}>
       <StoreCtx.Provider value={store}>
         <div className="fr-wrapper">
-          <Left saveList={saveList} setSaveList={setSaveList} />
-          <div className="mid-layout pr2">
-            {_extraBtns?.length ||
-              (_.compact(_showDefaultBtns)?.length ? (
-                <div className="mv2 mh1">
-                  {_showDefaultBtns[0] !== false && (
-                    <Button
-                      className="mr2 mb1"
-                      onClick={() => {
-                        setGlobal({ preview: !preview, selected: '#' });
-                      }}
-                    >
-                      {preview ? '编辑' : '预览'}
-                    </Button>
-                  )}
-                  {_showDefaultBtns[1] !== false && (
-                    <Button className="mr2" onClick={clearSchema}>
-                      清空
-                    </Button>
-                  )}
-                  {/* <Button className="mr2" onClick={toggleModal3}>
-                  保存
-                </Button> */}
-                  {_showDefaultBtns[2] !== false && (
-                    <Button className="mr2" onClick={toggleModal2}>
-                      导入
-                    </Button>
-                  )}
-                  {_showDefaultBtns[3] !== false && (
-                    <Button
-                      type="primary"
-                      className="mr2"
-                      onClick={toggleModal}
-                    >
-                      导出schema
-                    </Button>
-                  )}
-                  {_extraBtns.map((item, idx) => {
-                    return (
-                      <Button key={idx.toString()} className="mr2" {...item}>
-                        {item.text || item.children}
-                      </Button>
-                    );
-                  })}
-                  {/* <Button type="primary" className="mr2" onClick={handleSubmit}>
-                  保存
-                </Button> */}
-                </div>
-              ) : null)}
-            <div className="dnd-container">
-              {preview ? (
-                <FormRender schema={displaySchema} />
-              ) : (
-                <>
-                  <div className="form-header">
-                    <p className="formName">
-                      {displaySchema?.formName || '表单名称'}
-                    </p>
-                    <p className="formDescription">
-                      {displaySchema?.formDescription}
-                    </p>
+          <div className="form-editor-wrap">
+            <Layout>
+              <Header className="layout-header">
+                <Align align="cm">
+                  {_extraBtns?.length ||
+                    (_.compact(_showDefaultBtns)?.length ? (
+                      <div>
+                        {_showDefaultBtns[0] !== false && (
+                          <Button
+                            className="mr2"
+                            onClick={() => {
+                              setGlobal({ preview: !preview, selected: '#' });
+                            }}
+                          >
+                            {preview ? '编辑' : '预览'}
+                          </Button>
+                        )}
+                        {_showDefaultBtns[1] !== false && (
+                          <Button className="mr2" onClick={clearSchema}>
+                            清空
+                          </Button>
+                        )}
+                        {_showDefaultBtns[2] !== false && (
+                          <Button className="mr2" onClick={toggleModal2}>
+                            导入
+                          </Button>
+                        )}
+                        {_showDefaultBtns[3] !== false && (
+                          <Button
+                            type="primary"
+                            className="mr2"
+                            onClick={toggleModal}
+                          >
+                            导出schema
+                          </Button>
+                        )}
+                        {_showDefaultBtns[4] !== false && (
+                          <Button className="mr2" onClick={toggleModal3}>
+                            保存
+                          </Button>
+                        )}
+                        {_extraBtns.map((item, idx) => {
+                          return (
+                            <Button
+                              key={idx.toString()}
+                              className="mr2"
+                              {...item}
+                            >
+                              {item.text || item.children}
+                            </Button>
+                          );
+                        })}
+                      </div>
+                    ) : null)}
+                </Align>
+              </Header>
+              <Layout>
+                <Sider
+                  theme="light"
+                  width={350}
+                  className="layout-sider"
+                  trigger={null}
+                  collapsible
+                  collapsed={collapsedLeftSider}
+                  collapsedWidth={30}
+                >
+                  <div
+                    style={{
+                      opacity: collapsedLeftSider ? 0 : 1,
+                      height: '100%',
+                      transition: 0.3,
+                    }}
+                  >
+                    <Left saveList={saveList} setSaveList={setSaveList} />
                   </div>
-                  <div style={{ height: preview ? 33 : 0 }}></div>
-                  <FR preview={preview} />
-                </>
-              )}
-              {/* <div className="form-footer">
+
+                  {collapsedLeftSider ? (
+                    <span
+                      className="iconfont left collapsed icon-caozuo-zhankai"
+                      onClick={toggleLeftSider}
+                    />
+                  ) : (
+                    <span
+                      className="iconfont left collapsed icon-caozuo-shouqi"
+                      onClick={toggleLeftSider}
+                    />
+                  )}
+                </Sider>
+                <Content className="layout-content mid-layout">
+                  <div className="dnd-container">
+                    {preview ? (
+                      <FormRender schema={displaySchema} />
+                    ) : (
+                      <>
+                        {/* <div className="form-header">
+                          <p className="formName">
+                            {displaySchema?.formName || '表单名称'}
+                          </p>
+                          <p className="formDescription">
+                            {displaySchema?.formDescription}
+                          </p>
+                        </div> */}
+                        <FR preview={preview} />
+                      </>
+                    )}
+                  </div>
+                </Content>
+                <Sider
+                  theme="light"
+                  width={350}
+                  className="layout-sider"
+                  trigger={null}
+                  collapsible
+                  collapsed={collapsedRightSider}
+                  collapsedWidth={30}
+                >
+                  <div
+                    style={{
+                      opacity: collapsedRightSider ? 0 : 1,
+                      height: '100%',
+                      transition: 0.3,
+                    }}
+                  >
+                    <Right globalProps={frProps} />
+                  </div>
+
+                  {collapsedRightSider ? (
+                    <span
+                      className="iconfont collapsed icon-caozuo-shouqi"
+                      onClick={toggleRightSider}
+                    />
+                  ) : (
+                    <span
+                      className="iconfont collapsed icon-caozuo-zhankai"
+                      onClick={toggleRightSider}
+                    />
+                  )}
+                </Sider>
+              </Layout>
+              <Footer className="layout-footer">
                 <Align align="cm">
                   <Button type="default">{'重置'}</Button>
                   <Button type="primary">{'提交'}</Button>
                 </Align>
-              </div> */}
-            </div>
+              </Footer>
+            </Layout>
           </div>
-          <Right globalProps={frProps} />
           <Modal
             visible={local.showModal}
             onOk={copySchema}

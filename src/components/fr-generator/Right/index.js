@@ -10,36 +10,10 @@ const { TabPane } = Tabs;
 
 export default function Right() {
   const [state, setState] = useSet({
-    showRight: true,
     showItemSettings: false,
   });
   const { selected } = useStore();
-  const { showRight, showItemSettings } = state;
-
-  const toggleRight = () => setState({ showRight: !showRight });
-
-  const ToggleIcon = () => (
-    <div
-      className="absolute top-0 left-0 pointer"
-      style={{ height: 50, width: 50, padding: '8px 0 0 8px' }}
-      onClick={toggleRight}
-    >
-      {showRight ? (
-        <RightOutlined style={{ fontSize: 20 }} className="f5" />
-      ) : (
-        <LeftOutlined style={{ fontSize: 20 }} className="f5" />
-      )}
-    </div>
-  );
-
-  const HideRightArrow = () => (
-    <div
-      className="absolute right-0 top-0 h2 flex-center"
-      style={{ width: 40 }}
-    >
-      <ToggleIcon />
-    </div>
-  );
+  const { showItemSettings } = state;
 
   // 如果没有选中任何item，或者是选中了根节点，object、list的内部，显示placeholder
   useEffect(() => {
@@ -50,9 +24,8 @@ export default function Right() {
     }
   }, [selected]);
 
-  return showRight ? (
-    <div className="right-layout relative pl2">
-      <ToggleIcon />
+  return (
+    <div className="right-layout relative pl3">
       <Tabs defaultActiveKey="1" onChange={() => {}}>
         {showItemSettings && (
           <TabPane tab="组件配置" key="1">
@@ -64,7 +37,5 @@ export default function Right() {
         </TabPane>
       </Tabs>
     </div>
-  ) : (
-    <HideRightArrow />
   );
 }

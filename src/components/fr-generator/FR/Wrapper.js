@@ -24,7 +24,8 @@ export default function Wrapper({
   const { type, hiddenControls = false } = schema;
   const boxRef = useRef(null);
   const [{ isDragging }, dragRef, dragPreview] = useDrag({
-    item: { type: 'box', $id: inside ? 0 + $id : $id },
+    type: 'box',
+    item: { $id: inside ? 0 + $id : $id },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
@@ -166,14 +167,16 @@ export default function Wrapper({
       borderColor: '#777',
       // marginLeft: 12,
       padding: '12px 12px 0',
+      marginBottom: 8,
       backgroundColor: '#e5e7ea',
     };
   } else if ($id === '#') {
     overwriteStyle = {
       ...overwriteStyle,
       borderColor: '#777',
+      marginBottom: 0,
       padding: 12,
-      height: 'calc(100% - 135px)',
+      height: '100%',
       overflow: 'auto',
       backgroundColor: '#e5e7ea',
     };

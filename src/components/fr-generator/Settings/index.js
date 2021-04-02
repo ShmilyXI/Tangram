@@ -89,17 +89,6 @@ const defaultCommonSettings = {
       },
     },
   },
-  ganged: {
-    title: '联动逻辑',
-    type: 'object',
-    properties: {
-      nonRepeatable: {
-        type: 'array',
-        enum: [],
-        'ui:widget': 'gangedBox',
-      },
-    },
-  },
 };
 
 // widget 用于schema中每个元素对应的右侧配置知道用哪个setting
@@ -127,7 +116,7 @@ const elements = [
     text: '单行文本',
     name: 'input',
     widget: 'input',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-danhangshurukuang"></span>,
     schema: {
       title: '单行文本',
       type: 'string',
@@ -184,7 +173,7 @@ const elements = [
     text: '多行文本',
     name: 'textarea',
     widget: 'textarea',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-duohangshurukuang"></span>,
     schema: {
       title: '多行文本',
       type: 'string',
@@ -238,7 +227,7 @@ const elements = [
     text: '数字输入框',
     name: 'number',
     widget: 'number',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-shuzishurukuang"></span>,
     schema: {
       title: '数字输入框',
       type: 'number',
@@ -292,7 +281,7 @@ const elements = [
     text: '日期选择',
     name: 'date',
     widget: 'baseDate',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-riqi"></span>,
     schema: {
       title: '日期选择',
       type: 'string',
@@ -328,7 +317,9 @@ const elements = [
   //   text: '时间选择',
   //   name: 'time',
   //   widget: 'baseTime',
-  //   icon: <InsertRowRightOutlined />,
+  //   icon: ( <svg className="icon" ariaHidden="true">
+  //   <use xlinkHref="#icon-duohangshurukuang"></use>
+  // </svg>),
   //   schema: {
   //     title: '时间选择',
   //     type: 'string',
@@ -357,7 +348,7 @@ const elements = [
     text: '下拉单选',
     name: 'select',
     widget: 'select',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-xialadanxuan"></span>,
     schema: {
       title: '下拉单选',
       type: 'string',
@@ -390,10 +381,50 @@ const elements = [
     },
   },
   {
+    text: '下拉多选',
+    name: 'multiSelect',
+    widget: 'multiSelect',
+    icon: <span className="iconfont icon-xialadanxuan"></span>,
+    schema: {
+      title: '下拉多选',
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+      enum: ['A', 'B', 'C', 'D'],
+      //   enumNames: ['杭州', '武汉', '湖州', '贵阳'],
+      'ui:widget': 'multiSelect',
+      controlType: '12',
+    },
+    setting: {
+      'ui:options': {
+        type: 'object',
+        'ui:labelWidth': 80,
+        properties: {
+          placeholder: {
+            title: '输入提示',
+            type: 'string',
+          },
+          allowClear: {
+            title: '清除按钮',
+            description: '填写内容后会出现清除按钮',
+            type: 'boolean',
+          },
+        },
+      },
+      enum: {
+        title: '选项字段',
+        type: 'array',
+        enum: [],
+        'ui:widget': 'editSelect',
+      },
+    },
+  },
+  {
     text: '点击多选',
     name: 'checkboxes',
     widget: 'checkboxes',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-duoxuan"></span>,
     schema: {
       title: '点击多选',
       type: 'array',
@@ -432,7 +463,7 @@ const elements = [
     text: '点击单选',
     name: 'radio',
     widget: 'radio',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-danxuan"></span>,
     schema: {
       title: '点击单选',
       type: 'string',
@@ -465,51 +496,12 @@ const elements = [
       },
     },
   },
-  {
-    text: '下拉多选',
-    name: 'multiSelect',
-    widget: 'multiSelect',
-    icon: <InsertRowRightOutlined />,
-    schema: {
-      title: '下拉多选',
-      type: 'array',
-      items: {
-        type: 'string',
-      },
-      enum: ['A', 'B', 'C', 'D'],
-      //   enumNames: ['杭州', '武汉', '湖州', '贵阳'],
-      'ui:widget': 'multiSelect',
-      controlType: '12',
-    },
-    setting: {
-      'ui:options': {
-        type: 'object',
-        'ui:labelWidth': 80,
-        properties: {
-          placeholder: {
-            title: '输入提示',
-            type: 'string',
-          },
-          allowClear: {
-            title: '清除按钮',
-            description: '填写内容后会出现清除按钮',
-            type: 'boolean',
-          },
-        },
-      },
-      enum: {
-        title: '选项字段',
-        type: 'array',
-        enum: [],
-        'ui:widget': 'editSelect',
-      },
-    },
-  },
+
   {
     text: '上传文件',
     name: 'baseUpload',
     widget: 'baseUpload',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-shangchuan"></span>,
     schema: {
       title: '上传文件',
       type: 'string',
@@ -570,7 +562,7 @@ const outerElements = [
     text: '手机号码',
     name: 'phoneNumber',
     widget: 'phoneInput',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-fuhao-dianhua"></span>,
     schema: {
       title: '手机号码',
       type: 'string',
@@ -595,7 +587,7 @@ const outerElements = [
     text: '邮箱',
     name: 'email',
     widget: 'baseInput',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-youxiang"></span>,
     schema: {
       title: '邮箱',
       type: 'string',
@@ -608,7 +600,7 @@ const outerElements = [
     text: '身份证号码',
     name: 'idCard',
     widget: 'baseInput',
-    icon: <InsertRowRightOutlined />,
+    icon: <span className="iconfont icon-zhanghaoguanli"></span>,
     schema: {
       title: '身份证号码',
       type: 'string',
@@ -650,14 +642,16 @@ const templates = [];
 // 左侧组件列表
 const defaultSettings = [
   {
-    title: '基础组件',
+    title: '基础',
     widgets: elements,
     show: true,
     useCommon: true, // TODO: 是否将common
+    icon: <span className="iconfont icon-youxiang"></span>,
   },
   {
-    title: '其他组件',
+    title: '其他',
     widgets: outerElements,
+    icon: <span className="iconfont icon-youxiang"></span>,
   },
   // {
   //   title: '业务组件',

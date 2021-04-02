@@ -382,5 +382,5 @@
 /* .fr-wrapper .link:hover { color: #3e71f7; font-size: 14px; } */
 
 @media screen and (min-width: 60em) {
-  .fr-wrapper .w5-l { width: 16rem; }
+  .fr-wrapper .w5-l { width: 20rem; }
 }

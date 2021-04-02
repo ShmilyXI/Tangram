@@ -10,5 +10,6 @@ export default defineConfig({
   history: {
     type: 'hash',
   },
+  antd: {},
   routes,
 });
